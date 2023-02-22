@@ -29,11 +29,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int lapTime = 0, oldLapTime = 0, lapTimeLim = 150, nowTime = 0, oldTime = 0, interval = 0;
-  double dAccelePre = 0, dAcceleNow = 0, gain = 0.8, hurdol = 10, bpm = 0;
+  int lapTime = 0, oldLapTime = 0, lapTimeLim = 250, nowTime = 0, oldTime = 0, interval = 0;
+  double dAccelePre = 0, dAcceleNow = 0, gain = 0.8, hurdol =  0.030, bpm = 0;
   List<double> a = [1,	-5.0294,	10.6070,	-11.9993,	7.6755,	-2.6311,	0.3775];
   List<double> b = [0.0000024972,	0.000014983,	0.000037458,	0.000049944,	0.000037458,	0.000014983,	0.0000024972];
-  List<double> accele = [0, 0, 0,0,0,0,0];
+  List<double> accele = [0,0,0,0,0,0,0];
   List<double> acceleFiltered = [0,0,0,0,0,0,0];
   List<num> speed = [0,0,0];
   num speedX = 0.0, speedY = 0.0, speedZ = 0.0;
@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
         nowTime = stopwatch.elapsedMilliseconds; //ストップウォッチ動かしてからの時間
         // debugPrint((nowTime-oldTime).toString());
         //加速度の帯域的な極大値見つける
-        if (accele[1] > hurdol &&
+        if (acceleFiltered[1] > hurdol &&
             dAccelePre > 0 &&
             dAcceleNow < 0 &&
             nowTime > (lapTime + lapTimeLim)) {
@@ -89,6 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
           lapTime = stopwatch.elapsedMilliseconds;
           interval = lapTime - oldLapTime;
           debugPrint(interval.toString());
+          debugPrint("   bpm:$bpm");
           bpm = 60000 / interval; //nowTime[ms]で2歩なので、bpm=2/(nowTime/1000)*60
           HapticFeedback.mediumImpact();
         }
@@ -118,14 +119,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
-                          "accele is : ",
+                          "acceleFilterd is : ",
                           style: TextStyle(fontSize: 20.0),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                            accele[0].toStringAsFixed(2), //trim the asis value to 2 digit after decimal point
+                            acceleFiltered[0].toStringAsFixed(4), //trim the asis value to 2 digit after decimal point
                             style: const TextStyle(fontSize: 20.0)),
                       )
                     ],
@@ -152,14 +153,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
-                          "interval is : ",
+                          "BPM is : ",
                           style: TextStyle(fontSize: 20.0),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                            interval.toStringAsFixed(2), //trim the asis value to 2 digit after decimal point
+                            bpm.toStringAsFixed(2), //trim the asis value to 2 digit after decimal point
                             style: const TextStyle(fontSize: 20.0)),
                       )
                     ],
