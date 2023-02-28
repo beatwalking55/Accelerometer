@@ -31,14 +31,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int lapTime = 0, oldLapTime = 0, lapTimeLim = 100, nowTime = 0, oldTime = 0, interval = 0, counter = 0;
-  double dAccelePre = 0, dAcceleNow = 0, dGyroPre = 0, dGyroNow = 0, gain = 0.84, acceleHurdol = 3, bpm = 0;
-  List<double> a = [1,	-5.0294,	10.6070,	-11.9993,	7.6755,	-2.6311,	0.3775];
-  List<double> b = [0.0000024972,	0.000014983,	0.000037458,	0.000049944,	0.000037458,	0.000014983,	0.0000024972];
-  List<double> accele = [0,0,0,0,0,0,0];
-  List<double> acceleFiltered = [0,0,0,0,0,0,0];
+  double dGyroPre = 0, dGyroNow = 0, gain = 0.84, acceleHurdol = 3, bpm = 0;
+  List<double> accele = [0];
+  List<double> acceleFiltered = [0,0];
   List<int> intervals = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-  final stopwatch = Stopwatch();
-  List<double> gyro = [0,0,0];
+  List<double> gyro = [0,0];
 
   @override
   void initState() {
