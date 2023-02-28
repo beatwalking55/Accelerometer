@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
   double dGyroPre = 0, dGyroNow = 0, gain = 0.84, acceleHurdol = 3, bpm = 0;
   List<double> accele = [0];
   List<double> acceleFiltered = [0,0];
-  List<int> intervals = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  List<int> intervals = List.filled(30, 0);
   List<double> gyro = [0,0];
 
   @override
