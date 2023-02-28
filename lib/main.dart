@@ -29,8 +29,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+<<<<<<< HEAD
   int lapTime = 0, oldLapTime = 0, lapTimeLim = 150, nowTime = 0, oldTime = 0, interval = 0;
   double dAccelePre = 0, dAcceleNow = 0, gain = 0.84, hurdol = 10, bpm = 0;
+=======
+  int lapTime = 0, oldLapTime = 0, lapTimeLim = 250, nowTime = 0, oldTime = 0, interval = 0;
+  double dAccelePre = 0, dAcceleNow = 0, gain = 0.8, hurdol =  0.030, bpm = 0;
+>>>>>>> 51cc31a2c5ec4861c15b9e21707a7353b6ea74e0
   List<double> a = [1,	-5.0294,	10.6070,	-11.9993,	7.6755,	-2.6311,	0.3775];
   List<double> b = [0.0000024972,	0.000014983,	0.000037458,	0.000049944,	0.000037458,	0.000014983,	0.0000024972];
   List<double> accele = [0,0,0,0,0,0,0];
@@ -97,6 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
           lapTime = stopwatch.elapsedMilliseconds;
           interval = lapTime - oldLapTime;
           debugPrint(interval.toString());
+          debugPrint("   bpm:$bpm");
           bpm = 60000 / interval; //nowTime[ms]で2歩なので、bpm=2/(nowTime/1000)*60
           HapticFeedback.mediumImpact();
         }
@@ -125,14 +131,22 @@ class _MyHomePageState extends State<MyHomePage> {
                       const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
+<<<<<<< HEAD
                           "acceleFiltered is : ",
+=======
+                          "acceleFilterd is : ",
+>>>>>>> 51cc31a2c5ec4861c15b9e21707a7353b6ea74e0
                           style: TextStyle(fontSize: 20.0),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
+<<<<<<< HEAD
                             acceleFiltered[0].toStringAsFixed(2), //trim the asis value to 2 digit after decimal point
+=======
+                            acceleFiltered[0].toStringAsFixed(4), //trim the asis value to 2 digit after decimal point
+>>>>>>> 51cc31a2c5ec4861c15b9e21707a7353b6ea74e0
                             style: const TextStyle(fontSize: 20.0)),
                       )
                     ],
@@ -159,14 +173,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
-                          "interval is : ",
+                          "BPM is : ",
                           style: TextStyle(fontSize: 20.0),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                            interval.toStringAsFixed(2), //trim the asis value to 2 digit after decimal point
+                            bpm.toStringAsFixed(2), //trim the asis value to 2 digit after decimal point
                             style: const TextStyle(fontSize: 20.0)),
                       )
                     ],
